@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 NetForge — pivot, tunnel, and staging helpers
-D3F4ULT
+D3F4UL7T
 
 Lab / authorized testing only.
 """
@@ -28,7 +28,7 @@ BANNER = r"""
  / /|  /  __/ /_/ __/ / /_/ / /  / /_/ /  __/
 /_/ |_/\___/\__/_/    \____/_/   \__, /\___/
                                 /____/
-  pivot · tunnel · stage  |  D3F4ULT
+  pivot · tunnel · stage  |  D3F4UL7T
 """
 
 
@@ -249,7 +249,7 @@ def main() -> None:
     print(BANNER)
     p = argparse.ArgumentParser(
         prog="netforge",
-        description="NetForge — pivot / tunnel / stage (D3F4ULT)",
+        description="NetForge — pivot / tunnel / stage (D3F4UL7T)",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 examples:

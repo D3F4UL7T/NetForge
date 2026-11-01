@@ -2,7 +2,7 @@
 
 Pivot, tunnel, and staging helpers for authorized labs.
 
-D3F4ULT
+**Developed by [D3F4UL7T](https://github.com/D3F4UL7T)**
 
 ## Features
 
@@ -64,3 +64,15 @@ NetForge/
 Fits with OffKit / HostEnum / ShellGen under the same lab toolkit set.
 
 Lab and authorized use only. Unauthorized access is illegal. Author assumes no liability for misuse.
+
+---
+
+## Credits
+
+**Developed by [D3F4UL7T](https://github.com/D3F4UL7T)**
+
+```
+root@D3F4ULT:~# whoami
+D3F4UL7T
+```
+
