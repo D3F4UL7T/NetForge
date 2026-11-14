@@ -31,10 +31,9 @@ BANNER = r"""
   pivot · tunnel · stage  |  D3F4UL7T
 """
 
-
-# ---------------------------------------------------------------------------
-# tunnel / pivot one-liners
-# ---------------------------------------------------------------------------
+                                                                             
+                           
+                                                                             
 
 TUNNELS = {
     "ssh_local": {
@@ -94,13 +93,11 @@ TUNNELS = {
     },
 }
 
-
 def list_tunnels() -> None:
     print("[*] tunnels / pivots\n")
     for k, v in TUNNELS.items():
         print(f"  {k:22}  {v['desc']}")
     print()
-
 
 def emit_tunnel(key: str, args: argparse.Namespace) -> None:
     if key not in TUNNELS:
@@ -126,10 +123,9 @@ def emit_tunnel(key: str, args: argparse.Namespace) -> None:
     print(out)
     print("-" * 60)
 
-
-# ---------------------------------------------------------------------------
-# pure-python port forward (built-in)
-# ---------------------------------------------------------------------------
+                                                                             
+                                     
+                                                                             
 
 def pipe(a: socket.socket, b: socket.socket) -> None:
     try:
@@ -148,7 +144,6 @@ def pipe(a: socket.socket, b: socket.socket) -> None:
                 s.close()
             except Exception:
                 pass
-
 
 def run_forward(listen_port: int, target_host: str, target_port: int, bind: str = "0.0.0.0") -> None:
     srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -173,10 +168,9 @@ def run_forward(listen_port: int, target_host: str, target_port: int, bind: str 
     finally:
         srv.close()
 
-
-# ---------------------------------------------------------------------------
-# staging HTTP server
-# ---------------------------------------------------------------------------
+                                                                             
+                     
+                                                                             
 
 class StageHandler(BaseHTTPRequestHandler):
     stage_dir: Path = Path(".")
@@ -188,7 +182,7 @@ class StageHandler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:
         rel = self.path.lstrip("/") or "index.html"
-        # block path traversal
+                              
         target = (self.stage_dir / rel).resolve()
         if not str(target).startswith(str(self.stage_dir.resolve())):
             self.send_error(403)
@@ -203,7 +197,6 @@ class StageHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(data)
 
-
 def run_stage(port: int, directory: str, bind: str = "0.0.0.0") -> None:
     StageHandler.stage_dir = Path(directory).resolve()
     httpd = ThreadingHTTPServer((bind, port), StageHandler)
@@ -216,10 +209,9 @@ def run_stage(port: int, directory: str, bind: str = "0.0.0.0") -> None:
     finally:
         httpd.server_close()
 
-
-# ---------------------------------------------------------------------------
-# encode helpers
-# ---------------------------------------------------------------------------
+                                                                             
+                
+                                                                             
 
 def encode_file(path: str, mode: str) -> None:
     data = Path(path).read_bytes()
@@ -228,8 +220,8 @@ def encode_file(path: str, mode: str) -> None:
     elif mode == "hex":
         print(data.hex())
     elif mode == "b64ps":
-        # UTF-16LE for PowerShell -EncodedCommand style
-        # if text, re-encode; if binary, just b64 of raw
+                                                       
+                                                        
         try:
             text = data.decode("utf-8")
             enc = base64.b64encode(text.encode("utf-16le")).decode()
@@ -240,10 +232,9 @@ def encode_file(path: str, mode: str) -> None:
         print(f"[!] unknown mode: {mode}")
         sys.exit(1)
 
-
-# ---------------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------------
+                                                                             
+     
+                                                                             
 
 def main() -> None:
     print(BANNER)
@@ -306,7 +297,6 @@ examples:
         run_stage(args.port, args.dir, args.bind)
     elif args.cmd == "encode":
         encode_file(args.file, args.mode)
-
 
 if __name__ == "__main__":
     main()
